@@ -1,0 +1,137 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ArchitectProfile from '../components/ArchitectProfile.astro';
+import DesignGallery from '../components/DesignGallery.astro';
+import '../styles/entrance.css';
+
+const links = [
+  { href: '/projeler/', label: 'Projeler' },
+  { href: '/hizmetler/', label: 'Hizmetler' },
+  { href: '/studyo/', label: 'Stüdyo' },
+  { href: '/iletisim/', label: 'İletişim' },
+];
+const scenes = [
+  { poster: '/images/videos/isik-zaman-gecisi.jpg', title: '', detail: '' },
+  { poster: '/images/videos/konut-yasam.jpg', title: 'Işığın izinde', detail: 'Mekân değiştikçe his de değişir.' },
+  { poster: '/images/videos/malzeme-isik.jpg', title: 'Malzeme ve ışık', detail: 'Küçük bir ayrıntı, bütünün sesini kurar.' },
+  { poster: '/images/videos/sekans-04.jpg', title: 'Katmanlar', detail: 'Her yüzey yeni bir bakış açısı açar.' },
+  { poster: '/images/videos/sekans-05.jpg', title: 'Yaşam alanı', detail: 'Sakinlik, ölçülü kararlarla oluşur.' },
+  { poster: '/images/videos/sekans-06.jpg', title: 'Üretimin izi', detail: 'Fikir, elde biçim kazanır.' },
+  { poster: '/images/videos/sekans-07.jpg', title: 'Günlük anlar', detail: 'Mekân, içindeki yaşama eşlik eder.' },
+  { poster: '/images/videos/sekans-08.jpg', title: 'Bir arada', detail: 'Tasarım, buluşmalara yer açar.' },
+];
+const statement = 'Yaşam alanlarını estetik, işlevsellik ve özgün tasarımla yeniden yorumluyoruz.';
+---
+
+<SiteLayout title="Mimarlık ve tasarım stüdyosu" immersive>
+  <section class="cinematic-scroll" aria-label="ZCY Mimarlık görsel hikâyesi">
+    <div class="entrance" id="entrance">
+      <div class="entrance__scenes" aria-hidden="true">
+        {scenes.map((scene, index) => (
+          <div class="entrance__scene" data-scene={index} style={`--scene-opacity: ${index === 0 ? 1 : 0}`}>
+            <img src={scene.poster} alt="" loading={index < 2 ? 'eager' : 'lazy'} />
+            <video data-src={`/videos/scroll/${String(index + 1).padStart(2, '0')}.mp4`} muted playsinline preload="none" tabindex="-1"></video>
+          </div>
+        ))}
+      </div>
+      <div class="entrance__shade" aria-hidden="true"></div>
+      <a class="entrance__home" href="/" aria-label="ZCY Mimarlık ana sayfa"><span></span></a>
+      <details class="entrance__menu">
+        <summary aria-label="Menüyü aç veya kapat"><span></span><span></span><span></span></summary>
+        <nav aria-label="Menü">{links.map((link) => <a href={link.href}>{link.label}</a>)}</nav>
+      </details>
+      <div class="entrance__navigation">
+        <p>Mimarlık<br />& tasarım<br />stüdyosu</p>
+        <nav aria-label="Ana gezinme">{links.map((link) => <a href={link.href}>{link.label}</a>)}</nav>
+      </div>
+      <h1 class="entrance__brand" id="entrance-title" aria-label="ZCY Mimarlık">
+        <span class="entrance__name" aria-hidden="true">ZCY</span>
+        <span class="entrance__discipline" aria-hidden="true">MİMARLIK</span>
+      </h1>
+      <div class="entrance__copy" aria-live="off">
+        {scenes.slice(1).map((scene, index) => (
+          <div class="entrance__chapter" data-chapter={index + 1} style="--chapter-opacity: 0">
+            <p class="entrance__chapter-number">{String(index + 2).padStart(2, '0')} / 08</p>
+            <h2>{scene.title}</h2>
+            <p>{scene.detail}</p>
+          </div>
+        ))}
+      </div>
+      <p class="entrance__hint">Projeleri izleyin <span aria-hidden="true">↓</span></p>
+    </div>
+  </section>
+  <section class="design-statement" aria-labelledby="statement-title">
+    <h2 id="statement-title" class="design-statement__title" aria-label={statement}>
+      {statement.split(' ').map((word, index) => (
+        <Fragment>
+          <span class="design-statement__mask" aria-hidden="true">
+            <span class:list={['design-statement__word', { 'design-statement__word--emphasis': index === 5 || index === 6 }]}>{word}</span>
+          </span>{' '}
+        </Fragment>
+      ))}
+    </h2>
+  </section>
+  <DesignGallery />
+  <ArchitectProfile />
+</SiteLayout>
+
+<script>
+  import '../scripts/scroll-scene';
+  import '../scripts/design-statement';
+</script>
+
+<style>
+  @font-face {
+    font-family: 'Gilroy Statement';
+    src: local('Gilroy Thin'), local('Gilroy-Thin'), local('Gilroy Hairline'), local('Gilroy UltraLight');
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Gilroy Statement';
+    src: local('Gilroy Light Italic'), local('Gilroy-LightItalic'), local('Gilroy Regular Italic'), local('Gilroy-RegularItalic');
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+  }
+  .design-statement {
+    display: grid;
+    place-items: center;
+    min-height: 140svh;
+    padding: clamp(7rem, 22svh, 18rem) clamp(1.25rem, 7vw, 8rem);
+    background-color: #fff;
+    color: #000;
+  }
+  .design-statement__title {
+    max-width: 20ch;
+    margin: 0;
+    color: inherit;
+    text-align: center;
+    font-family: 'Gilroy Statement', 'Gilroy', 'Avenir Next', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(2.2rem, 5.8vw, 6.5rem);
+    font-weight: 100;
+    line-height: 1.22;
+    letter-spacing: -.035em;
+    text-wrap: balance;
+  }
+  .design-statement__mask {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    padding-inline: .08em;
+    margin-inline: -.08em;
+  }
+  .design-statement__word { display: inline-block; color: inherit; }
+  .design-statement__word--emphasis {
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.06em;
+  }
+  @media (max-width: 767px) {
+    .design-statement { min-height: 120svh; padding-inline: 1.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .design-statement { min-height: 100svh; }
+  }
+</style>

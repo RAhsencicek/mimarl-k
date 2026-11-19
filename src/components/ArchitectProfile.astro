@@ -1,0 +1,131 @@
+<section class="architect-profile" aria-labelledby="architect-profile-title">
+  <div class="bubble-background" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="architect-profile__content">
+    <p class="architect-profile__eyebrow"><span class="architect-profile__dot"></span> ZCY MİMARLIK · EKİBİMİZ</p>
+    <div class="architect-profile__hero">
+      <p class="architect-profile__index">01 <span>—</span> MİMAR</p>
+      <h2 id="architect-profile-title">Zehra <em>Yılmaz</em></h2>
+      <p class="architect-profile__lead">Mekânın karakterini, insanın yaşamıyla buluşturan bir tasarım yaklaşımı.</p>
+    </div>
+
+    <div class="architect-profile__footer">
+      <div class="architect-profile__bio">
+        <p><strong>Mimar Zehra Yılmaz, mimari tasarım ve iç mekân çözümlerini uygulama deneyimiyle bir araya getirerek, yaşamın ihtiyaçlarına yanıt veren özgün mekânlar tasarlar.</strong></p>
+        <p>Tasarım yaklaşımının merkezinde kullanıcı, mekânın bağlamı ve işlevsel bir kurgu yer alır. Malzeme, ışık ve oranı bütüncül bir anlayışla ele alır; estetik değerini gündelik kullanımda da koruyan, zamansız mekânlar üretmeyi hedefler.</p>
+        <p>Fırat Üniversitesi’nde tamamladığı mimarlık eğitimini, Elazığ’daki tasarım ve uygulama çalışmalarıyla geliştirir. Proje geliştirme ve saha deneyimini birlikte değerlendirerek, tasarım kararlarını uygulanabilir detaylara dönüştürmeye odaklanır.</p>
+      </div>
+      <div class="architect-profile__meta">
+        <div><span>UZMANLIK</span><p>Mimari · İç mekân · Uygulama</p></div>
+        <div><span>MERKEZ</span><p>Elazığ, Türkiye</p></div>
+        <address class="architect-profile__contact" aria-label="İletişim bilgileri">
+          <div><span>E-POSTA</span><a href="mailto:zcymimarlik@hotmail.com">zcymimarlik@hotmail.com</a></div>
+          <div><span>MOBİL</span><a href="tel:+905352348667">0 (535) 234 86 67</a></div>
+          <div><span>TELEFON</span><a href="tel:+904242414444">0 (424) 241 44 44</a></div>
+          <div><span>ADRES</span><p>Sürsürü Mh. İmam Efendi Blv.<br />No: 27/A · Merkez / Elazığ</p></div>
+        </address>
+      </div>
+      <a class="architect-profile__linkedin" href="https://tr.linkedin.com/in/zehra-y%C4%B1lmaz-b19313177" target="_blank" rel="noopener noreferrer">
+        <span>LinkedIn’de profili gör</span><span class="architect-profile__arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <span class="architect-profile__watermark" aria-hidden="true">ZCY</span>
+  </div>
+</section>
+
+<style>
+  .architect-profile {
+    --profile-ink: #30312a;
+    --profile-muted: #67675c;
+    --profile-accent: #956a4f;
+    position: relative;
+    isolation: isolate;
+    min-height: 0;
+    overflow: hidden;
+    display: grid;
+    align-items: center;
+    padding: clamp(2rem, 4vh, 3rem) clamp(1.5rem, 9vw, 10rem);
+    background: radial-gradient(ellipse at 90% 15%, rgba(190, 167, 133, .15), transparent 55%), linear-gradient(145deg, #f3f1eb, #e9e5db);
+    color: var(--profile-ink);
+    font-family: 'Manrope', 'Segoe UI', Arial, sans-serif;
+  }
+  .bubble-background { position: absolute; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; }
+  .bubble-background span {
+    position: absolute;
+    bottom: -150px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(190, 143, 57, .38);
+    border-radius: 50%;
+    background: radial-gradient(circle at 28% 25%, rgba(255, 248, 216, .95), rgba(226, 185, 94, .42) 55%, rgba(177, 126, 39, .5));
+    box-shadow: inset 0 0 18px rgba(255, 241, 187, .55), 0 0 30px rgba(218, 169, 68, .18);
+    animation: floatBubble 15s infinite ease-in-out;
+  }
+  .bubble-background span:nth-child(1) { left: 10%; width: 30px; height: 30px; animation-duration: 12s; }
+  .bubble-background span:nth-child(2) { left: 25%; width: 90px; height: 90px; animation-duration: 18s; animation-delay: -5s; }
+  .bubble-background span:nth-child(3) { left: 40%; width: 50px; height: 50px; animation-duration: 14s; animation-delay: -8s; }
+  .bubble-background span:nth-child(4) { left: 55%; width: 120px; height: 120px; animation-duration: 22s; animation-delay: -12s; }
+  .bubble-background span:nth-child(5) { left: 70%; width: 25px; height: 25px; animation-duration: 10s; animation-delay: -3s; }
+  .bubble-background span:nth-child(6) { left: 85%; width: 75px; height: 75px; animation-duration: 17s; animation-delay: -10s; }
+  .bubble-background span:nth-child(7) { left: 15%; width: 110px; height: 110px; animation-duration: 20s; animation-delay: -15s; }
+  .bubble-background span:nth-child(8) { left: 65%; width: 40px; height: 40px; animation-duration: 13s; animation-delay: -7s; }
+  @keyframes floatBubble {
+    0% { transform: translate(0, 0) scale(.8); opacity: 0; }
+    15% { opacity: .65; }
+    50% { transform: translate(35px, -55vh) scale(1.1); }
+    85% { opacity: .65; }
+    100% { transform: translate(-20px, -120vh) scale(.9); opacity: 0; }
+  }
+  .architect-profile__content { position: relative; width: min(100%, 1280px); margin-inline: auto; }
+  .architect-profile__eyebrow, .architect-profile__index, .architect-profile__meta span {
+    font-size: .68rem; letter-spacing: .17em; font-weight: 500;
+  }
+  .architect-profile__eyebrow { display: flex; align-items: center; gap: .8rem; margin: 0; color: var(--profile-muted); }
+  .architect-profile__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--profile-accent); box-shadow: 0 0 0 5px rgba(149, 106, 79, .08); }
+  .architect-profile__hero { max-width: 1000px; margin: clamp(1.75rem, 4vh, 3rem) 0 clamp(1.5rem, 3vh, 2.5rem); }
+  .architect-profile__index { color: var(--profile-muted); margin: 0 0 1rem; }
+  .architect-profile__index span { color: var(--profile-accent); padding-inline: .4rem; }
+  .architect-profile__hero h2 { margin: 0; font-size: clamp(4.5rem, 12.4vw, 11.8rem); line-height: .88; letter-spacing: -.085em; font-weight: 200; }
+  .architect-profile__hero h2 em { color: #71634f; font-family: Georgia, serif; font-weight: 400; letter-spacing: -.075em; }
+  .architect-profile__lead { max-width: 33rem; margin: 1.25rem 0 0 auto; color: var(--profile-muted); font-size: clamp(1.05rem, 2vw, 1.45rem); line-height: 1.55; }
+  .architect-profile__footer { display: grid; grid-template-columns: 1.15fr 1fr auto; align-items: start; gap: clamp(1.5rem, 3vw, 3rem); border-top: 1px solid rgba(32,35,38,.2); padding-top: 1.7rem; }
+  .architect-profile__bio { max-width: 33rem; margin: 0; color: var(--profile-muted); font-size: .96rem; line-height: 1.8; }
+  .architect-profile__bio p { margin-bottom: 1.1rem; }
+  .architect-profile__bio strong { color: var(--profile-ink); font-weight: 600; }
+  .architect-profile__meta { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; }
+  .architect-profile__meta div { min-width: 9rem; }
+  .architect-profile__meta span { color: var(--profile-muted); font-size: .58rem; }
+  .architect-profile__meta p { margin: .6rem 0 0; font-size: .85rem; }
+  .architect-profile__footer > *, .architect-profile__meta { min-width: 0; }
+  .architect-profile__contact { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; gap: 1.4rem 1rem; padding-top: 1.5rem; border-top: 1px solid rgba(32,35,38,.15); font-style: normal; }
+  .architect-profile__contact div { min-width: 0; }
+  .architect-profile__contact a { display: block; width: fit-content; max-width: 100%; padding-block: .6rem; font-size: .85rem; overflow-wrap: anywhere; text-underline-offset: .25em; }
+  .architect-profile__contact a:hover { color: var(--profile-accent); text-decoration: underline; }
+  .architect-profile__contact p { line-height: 1.8; }
+  .architect-profile__linkedin { display: flex; align-items: center; gap: 1.2rem; white-space: nowrap; color: var(--profile-ink); font-size: .78rem; }
+  .architect-profile__arrow { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border: 1px solid rgba(32,35,38,.35); border-radius: 50%; font-size: 1.1rem; transition: background .25s, color .25s, transform .25s; }
+  .architect-profile__linkedin:hover .architect-profile__arrow { background: var(--profile-ink); color: #f3f1eb; transform: translate(2px,-2px); }
+  .architect-profile__watermark { position: absolute; right: -2%; bottom: -24%; z-index: -1; color: rgba(32,35,38,.035); font-weight: 600; font-size: clamp(15rem, 34vw, 38rem); letter-spacing: -.12em; line-height: .8; pointer-events: none; }
+  @media (max-width: 1100px) {
+    .architect-profile { padding-block: 2rem; }
+    .architect-profile__hero { margin-block: 2rem 1.5rem; }
+    .architect-profile__lead { margin-left: 0; }
+    .architect-profile__footer { grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; }
+    .architect-profile__bio { grid-column: 1 / -1; }
+    .architect-profile__linkedin { justify-self: start; }
+  }
+  @media (max-width: 520px) {
+    .architect-profile__hero h2 { font-size: clamp(4rem, 17vw, 6rem); }
+    .architect-profile__footer { grid-template-columns: 1fr; }
+    .architect-profile__bio { grid-column: auto; }
+    .architect-profile__meta { gap: 1.2rem; }
+    .architect-profile__watermark { right: -8%; bottom: -8%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bubble-background span { animation: none; opacity: .5; bottom: 15%; }
+    .architect-profile__arrow { transition: none; }
+  }
+</style>

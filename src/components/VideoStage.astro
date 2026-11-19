@@ -1,0 +1,54 @@
+---
+interface Props {
+  label: string;
+  src?: string;
+  poster?: string;
+  alt?: string;
+  autoplay?: boolean;
+  loop?: boolean;
+  muted?: boolean;
+  controls?: boolean;
+  ratio?: 'landscape' | 'portrait' | 'square';
+  className?: string;
+}
+
+const {
+  label,
+  src,
+  poster,
+  alt = '',
+  autoplay = true,
+  loop = true,
+  muted = true,
+  controls = false,
+  ratio = 'landscape',
+  className,
+} = Astro.props;
+const decorative = autoplay && muted && !controls;
+---
+
+<div class:list={['video-stage', className]} data-media-slot={label} data-ratio={ratio}>
+  {src ? (
+    <video
+      class="video-stage__video"
+      src={src}
+      poster={poster}
+      autoplay={autoplay}
+      loop={loop}
+      muted={muted}
+      playsinline
+      preload={autoplay ? 'metadata' : 'none'}
+      controls={controls}
+      aria-label={decorative ? undefined : alt || label}
+      aria-hidden={decorative ? 'true' : undefined}
+    >
+      Tarayıcınız video oynatmayı desteklemiyor.
+    </video>
+  ) : (
+    <div class="video-stage__empty" role="img" aria-label={`${label} video alanı`}>
+      <span class="video-stage__index">{label}</span>
+      <span class="video-stage__mark" aria-hidden="true">ZCY</span>
+      <span class="video-stage__note">Video alanı · içerik bekleniyor</span>
+    </div>
+  )}
+</div>

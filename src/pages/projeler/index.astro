@@ -1,0 +1,21 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import VideoStage from '../../components/VideoStage.astro';
+
+const filters = ['Tümü', 'Konut', 'İç mekân', 'Ticari', 'Kültür'];
+---
+
+<SiteLayout title="Projeler" description="ZCY Mimarlık proje seçkisi.">
+  <section class="page-intro section-shell">
+    <p class="eyebrow">ZCY MİMARLIK / PORTFÖY</p>
+    <h1>Projeler<span class="title-period">.</span></h1>
+    <p>Her proje, kendi bağlamına ve ihtiyaçlarına göre gelişir. Seçki, ZCY proje materyalleri geldikçe oluşturulacak.</p>
+  </section>
+  <section class="section-shell section-space">
+    <p class="filter-list" aria-label="Proje türleri">
+      {filters.map((filter) => <span class="filter-chip">{filter}</span>)}
+    </p>
+    <VideoStage label="01 / Proje seçkisi" />
+    <p class="media-caption">Proje kapak görseli veya video eklenecek.</p>
+  </section>
+</SiteLayout>

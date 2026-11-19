@@ -1,0 +1,210 @@
+---
+// SplashScreen bileşeni
+---
+
+<!-- Açılış Ekranı Başlangıcı -->
+<div id="splash-screen" class="shimmer-bg">
+  <canvas id="splash-particles" class="particles-canvas" aria-hidden="true"></canvas>
+  <div class="splash-content">
+    <div class="brand-title">ZCY MİMARLIK</div>
+    <h1 class="glow-text">ZEHRA YILMAZ</h1>
+  </div>
+</div>
+<!-- Açılış Ekranı Bitişi -->
+
+<style>
+  /* Açılış ekranını tam ekran yapıp tüm sitenin üstüne (z-index) yerleştirir */
+  #splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    overflow: hidden;
+    transition: opacity 1s ease-out, visibility 1s ease-out;
+  }
+
+  /* Işıltılı parçacıklar tuvali */
+  .particles-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Aşağı doğru akan gri/gümüş ışıltı efekti */
+  .shimmer-bg {
+    background: linear-gradient(180deg, #181818, #444444, #999999, #e0e0e0, #888888, #2c2c2c, #181818);
+    background-size: 100% 400%;
+    animation: shimmerEffect 4s linear infinite;
+  }
+
+  @keyframes shimmerEffect {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 0% 100%; }
+  }
+
+  .splash-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1.25rem;
+    padding: 2rem;
+  }
+
+  /* Ortada ZCY MİMARLIK yazısı */
+  .brand-title {
+    color: #ffffff;
+    font-family: 'ZCY Bodoni', Didot, 'Times New Roman', serif;
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 500;
+    letter-spacing: clamp(4px, 1.2vw, 10px);
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 0 30px rgba(200, 200, 200, 0.2);
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  /* Parlayan yazı efekti */
+  .glow-text {
+    margin: 0;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: clamp(0.9rem, 1.8vw, 1.3rem);
+    letter-spacing: 6px;
+    font-weight: 300;
+    opacity: 0.9;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 10px #ffffff, 0 0 20px #888888; }
+    to { text-shadow: 0 0 20px #ffffff, 0 0 35px #cccccc; }
+  }
+
+  /* Javascript ile tetiklenecek kaybolma sınıfı */
+  .fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+</style>
+
+<script is:inline>
+  (function initShimmerParticles() {
+    const canvas = document.getElementById('splash-particles');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    window.addEventListener('resize', function () {
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particlesCount = 85;
+    const particles = [];
+
+    for (let i = 0; i < particlesCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 2.0 + 0.9,
+        speedY: Math.random() * 1.5 + 1.1, // Daha yavaş, akıcı süzülme
+        speedX: (Math.random() - 0.5) * 0.25,
+        opacity: Math.random() * 0.65 + 0.35,
+        twinkleSpeed: Math.random() * 0.04 + 0.015,
+        twinklePhase: Math.random() * Math.PI * 2,
+        tailLength: Math.random() * 140 + 90 // Uzun ışıltı boyu
+      });
+    }
+
+    let animationId;
+    function render() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.twinklePhase += p.twinkleSpeed;
+        const currentOpacity = Math.max(0.12, p.opacity + Math.sin(p.twinklePhase) * 0.35);
+
+        // Yukarıdan aşağı dökülürken hafif sıcak sarımsı / altın ışıltılı kuyruk efekti
+        const gradient = ctx.createLinearGradient(p.x, p.y - p.tailLength, p.x, p.y);
+        gradient.addColorStop(0, 'rgba(255, 225, 160, 0)');
+        gradient.addColorStop(0.5, `rgba(255, 235, 180, ${currentOpacity * 0.25})`);
+        gradient.addColorStop(0.85, `rgba(255, 245, 205, ${currentOpacity * 0.7})`);
+        gradient.addColorStop(1, `rgba(255, 250, 220, ${currentOpacity})`);
+
+        ctx.beginPath();
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = p.radius * 1.0;
+        ctx.lineCap = 'round';
+        ctx.moveTo(p.x, p.y - p.tailLength);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+
+        // Sıcak sarımsı parlayan parçacık çekirdeği
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 248, 220, ${currentOpacity})`;
+        ctx.shadowBlur = p.radius * 8;
+        ctx.shadowColor = 'rgba(255, 215, 120, 0.9)';
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Pozisyon güncelleme
+        p.y += p.speedY;
+        p.x += p.speedX;
+
+        // Ekranın altına ulaştığında yukarıdan tekrar başlat
+        if (p.y > height + p.tailLength) {
+          p.y = -p.tailLength - Math.random() * 40;
+          p.x = Math.random() * width;
+        }
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+      }
+
+      const splash = document.getElementById('splash-screen');
+      if (splash && !splash.classList.contains('fade-out')) {
+        animationId = requestAnimationFrame(render);
+      } else {
+        cancelAnimationFrame(animationId);
+      }
+    }
+
+    render();
+  })();
+
+  function hideSplash() {
+    setTimeout(function() {
+      const splash = document.getElementById('splash-screen');
+      if (splash) {
+        splash.classList.add('fade-out');
+        window.dispatchEvent(new CustomEvent('splash:done'));
+        setTimeout(function() {
+          splash.remove();
+        }, 1100);
+      }
+    }, 2800); // 2.8 saniye parçacık şöleni gösterilsin
+  }
+
+  if (document.readyState === 'complete') {
+    hideSplash();
+  } else {
+    window.addEventListener('load', hideSplash);
+  }
+</script>

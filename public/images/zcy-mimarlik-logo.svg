@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 220" role="img" aria-labelledby="title desc">
+  <title id="title">ZCY Mimarlık</title>
+  <desc id="desc">Şeffaf zemin üzerinde zarif serif karakterlerle ZCY ve Mimarlık yazısı.</desc>
+  <g fill="#e3e8e8" fill-opacity=".88">
+    <text x="310" y="151" text-anchor="middle" font-family="Bodoni 72, Didot, 'Times New Roman', serif" font-size="164" font-weight="400" letter-spacing="-10">ZCY</text>
+    <text x="310" y="199" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="400" letter-spacing="12">MİMARLIK</text>
+  </g>
+</svg>

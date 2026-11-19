@@ -1,0 +1,109 @@
+---
+const floors = [0, 1, 2, 3, 4];
+const links = [ ['Projeler', '/projeler/'], ['Hizmetler', '/hizmetler/'], ['Stüdyo', '/studyo/'], ['İletişim', '/iletisim/'] ];
+---
+<footer class="architecture-footer" aria-labelledby="footer-title">
+  <div class="architecture-footer__main">
+    <div class="architecture-footer__copy">
+      <p class="architecture-footer__eyebrow"><span></span> FİKİRDEN MEKÂNA</p>
+      <h2 id="footer-title">Birlikte<br />bir iz <em>bırakalım.</em></h2>
+      <p class="architecture-footer__description">Her çizgi bir fikir.<br />Her katman, yaşama açılan yeni bir alan.</p>
+      <a class="architecture-footer__contact" href="/iletisim/">Bir projeyi konuşalım <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="architecture-footer__model">
+      <svg class="building-model" viewBox="0 0 600 610" fill="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="floor-top" x1="140" y1="240" x2="460" y2="400" gradientUnits="userSpaceOnUse"><stop stop-color="#777260"/><stop offset="1" stop-color="#353a32"/></linearGradient>
+          <linearGradient id="floor-edge"><stop stop-color="#b59b76"/><stop offset=".5" stop-color="#75664e"/><stop offset="1" stop-color="#c4ae88"/></linearGradient>
+          <pattern id="plan-grid" width="25" height="25" patternUnits="userSpaceOnUse" patternTransform="matrix(1 .55 -1 .55 300 210)"><path d="M25 0H0V25" stroke="#c7b999" stroke-opacity=".14" stroke-width=".7"/></pattern>
+        </defs>
+        <g stroke="#b8ab90" stroke-opacity=".13" stroke-width="1">
+          <path d="M50 470 300 325 550 470 300 615Z M100 440 350 585 M150 412 400 556 M200 383 450 528 M250 354 500 499 M100 499 350 354 M150 528 400 383 M200 556 450 412 M250 585 500 440"/>
+        </g>
+        <path d="m110 460 190-110 190 110-190 110Z" fill="#1b201c" stroke="#a39373" stroke-opacity=".4"/>
+        <g class="building-frame" stroke="#b9aa8b" stroke-width="1.2">
+          {[ [140, 317], [300, 405], [460, 317], [300, 229] ].map(([x,y]) => <path d={`M${x} ${y - 112}V${y + 112}`} />)}
+          {[0,1,2,3,4].map(i => <g opacity=".55"><path d={`M180 ${339-i*28}v-24 M220 ${361-i*28}v-24 M260 ${383-i*28}v-24 M340 ${383-i*28}v-24 M380 ${361-i*28}v-24 M420 ${339-i*28}v-24`} /></g>)}
+        </g>
+        {floors.map(i => (
+          <g class="building-floor" data-floor={i} style={`--spread: ${88-i*67}px; --settled: ${-i*28}px; transform: translateY(${-i*28}px)`}>
+            <path d="m140 317 160 88 160-88v9l-160 88-160-88Z" fill="url(#floor-edge)" stroke="#bba786" stroke-width=".7"/>
+            <path d="m140 317 160-88 160 88-160 88Z" fill="url(#floor-top)" stroke="#c6b393" stroke-width="1"/>
+            <path d="m140 317 160-88 160 88-160 88Z" fill="url(#plan-grid)"/>
+            <path d="m179 317 121-66 121 66-121 67Z M260 295l80 44 M260 339l80-44" stroke="#d1c4a8" stroke-opacity=".3" stroke-width=".8"/>
+            {i === 4 && <g><path d="m260 317 40-22 40 22-40 22Z" fill="#c0a47a" fill-opacity=".18" stroke="#c0a47a"/><path d="m300 295v44 M260 317h80" stroke="#c0a47a" stroke-opacity=".5"/></g>}
+          </g>
+        ))}
+        <g class="building-annotations" stroke="#aa9775" stroke-width=".7"><path d="M476 210h35v224h-35 M506 210l10-6 M506 434l10-6 M124 453l160 89 M120 448l8 10 M280 537l8 10"/></g>
+        <g fill="#a99f89" font-size="9" letter-spacing="3" font-family="Arial, sans-serif"><text x="300" y="590" text-anchor="middle">ZCY / MİMARİ BİR BÜTÜN</text></g>
+      </svg>
+      <div class="architecture-footer__caption"><span class="building-status">01 — FİKİR</span><span>ÇİZGİ · KATMAN · YAŞAM</span></div>
+    </div>
+  </div>
+  <div class="architecture-footer__base">
+    <a class="architecture-footer__brand" href="/" aria-label="ZCY Mimarlık ana sayfa">ZCY <span>MİMARLIK</span></a>
+    <nav aria-label="Alt menü">{links.map(([label, href]) => <a href={href}>{label}</a>)}</nav>
+    <span class="architecture-footer__location">Elazığ, Türkiye</span>
+  </div>
+  <div class="architecture-footer__legal"><span>© {new Date().getFullYear()} ZCY Mimarlık</span><span>Mekâna değer, yaşama anlam.</span></div>
+</footer>
+
+<script>
+  import gsap from 'gsap';
+  const footer = document.querySelector<HTMLElement>('.architecture-footer');
+  if (footer && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const floors = footer.querySelectorAll<SVGGElement>('.building-floor');
+    const status = footer.querySelector('.building-status');
+    const timeline = gsap.timeline({ paused: true, repeat: -1, repeatDelay: 1.5 });
+    timeline.set(floors, { y: i => 88 - i * 67 })
+      .set('.building-frame, .building-annotations', { opacity: 0 })
+      .call(() => { if (status) status.textContent = '01 — FİKİR'; })
+      .to(floors, { y: i => -i * 28, duration: 2.8, stagger: .18, ease: 'power3.inOut' }, 1.3)
+      .call(() => { if (status) status.textContent = '02 — YAPI'; })
+      .to(footer.querySelector('.building-frame'), { opacity: .8, duration: 1.2 }, '-=.7')
+      .to(footer.querySelector('.building-annotations'), { opacity: .65, duration: .8 }, '-=.5')
+      .to({}, { duration: 3.5 })
+      .to('.building-frame, .building-annotations', { opacity: 0, duration: .7 })
+      .to(floors, { y: i => 88 - i * 67, duration: 2.2, stagger: .08, ease: 'power2.inOut' }, '-=.2');
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) timeline.play(); else timeline.pause();
+    }, { threshold: .15 });
+    observer.observe(footer);
+    window.addEventListener('pagehide', () => { observer.disconnect(); timeline.kill(); }, { once: true });
+  }
+</script>
+
+<style>
+  .architecture-footer { position: relative; overflow: hidden; padding: 0 clamp(1.5rem, 7vw, 8rem); color: #e8e3d7; background: #252a24; font-family: 'Manrope', 'Segoe UI', sans-serif; }
+  .architecture-footer__main { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 2rem; max-width: 1440px; margin: auto; padding-block: 4rem 3rem; }
+  .architecture-footer__eyebrow { display: flex; align-items: center; gap: .8rem; margin-bottom: 2.8rem; color: #b7aa91; font-size: .62rem; letter-spacing: .2em; }
+  .architecture-footer__eyebrow span { width: 5px; height: 5px; border-radius: 50%; background: #b7aa91; }
+  .architecture-footer h2 { margin: 0; font-size: clamp(3.2rem, 5.8vw, 6.5rem); font-weight: 300; line-height: 1.04; letter-spacing: -.065em; }
+  .architecture-footer h2 em { color: #c4b08e; font-family: 'ZCY Bodoni', Georgia, serif; font-weight: 400; }
+  .architecture-footer__description { margin: 2rem 0; color: #b0b3a7; font-size: .85rem; line-height: 1.9; }
+  .architecture-footer__contact { display: inline-flex; align-items: center; gap: 2.5rem; padding-bottom: .8rem; border-bottom: 1px solid #7e816f; font-size: .75rem; }
+  .architecture-footer__contact span { font-size: 1.5rem; color: #c4b08e; transition: transform .3s; }
+  .architecture-footer__contact:hover span { transform: translate(4px,-4px); }
+  .architecture-footer__model { min-width: 0; }
+  .building-model { display: block; width: 100%; max-height: 620px; overflow: visible; }
+  .building-floor { will-change: transform; }
+  .building-status { min-width: 7rem; }
+  .architecture-footer__caption { display: flex; justify-content: space-between; gap: 1rem; color: #a7a794; font-size: .54rem; letter-spacing: .14em; }
+  .architecture-footer__base { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; padding-block: 2rem; border-top: 1px solid #ffffff26; }
+  .architecture-footer__brand { display: flex; align-items: baseline; gap: .8rem; font-size: 2.3rem; line-height: 1; letter-spacing: -.08em; }
+  .architecture-footer__brand span { font-size: .55rem; letter-spacing: .22em; color: #b7aa91; }
+  .architecture-footer nav { display: flex; flex-wrap: wrap; gap: 1.8rem; font-size: .7rem; color: #c6c9bd; }
+  .architecture-footer nav a:hover { color: #e3cda6; }
+  .architecture-footer__location { color: #a7a794; font-size: .65rem; }
+  .architecture-footer__legal { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid #ffffff15; padding-block: 1.2rem; color: #969d8f; font-size: .58rem; letter-spacing: .05em; }
+  @media (max-width: 720px) {
+    .architecture-footer__main { grid-template-columns: 1fr; gap: 0; padding-top: 4rem; }
+    .architecture-footer__eyebrow { margin-bottom: 2rem; }
+    .architecture-footer__model { max-width: 480px; width: 100%; margin: 1rem auto 0; }
+    .architecture-footer__base { align-items: start; gap: 1.8rem; }
+    .architecture-footer nav { width: 100%; order: 3; gap: 1.4rem; }
+    .architecture-footer__location { margin-top: .7rem; }
+    .architecture-footer__legal { font-size: .53rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .building-floor { will-change: auto; } }
+</style>

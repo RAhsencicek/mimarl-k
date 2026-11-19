@@ -1,0 +1,87 @@
+---
+import ProjectRail from './ProjectRail.astro';
+
+const cards = [
+  { image: 'cool-lounge.jpg', alt: 'Açık gri duvarlar ve nötr dokularla tasarlanmış oturma alanı', title: 'Yaşamın ritmi', text: 'Bir mekânı tasarlamaya, orada nasıl yaşanacağını anlamakla başlıyoruz. Günün ilk ışığından akşamın sakinliğine kadar değişen ihtiyaçları; dolaşım, depolama, dinlenme ve bir araya gelme alanlarıyla birlikte düşünüyoruz. Doğal ışığı doğru yönlendiren, ferahlığı koruyan ve günlük hayatı kolaylaştıran planlar geliştiriyoruz.' },
+  { image: 'cool-detail.jpg', alt: 'Gri taş duvar, siyah metal merdiven ve antrasit yemek masası', title: 'İncelikli detaylar', text: 'Mekânın karakteri, büyük kararlardan en küçük birleşim noktasına kadar uzanan bir özenle oluşur. Taşın dokusunu, metalin yüzeyini, ahşabın damarını ve ışığın bu malzemeler üzerindeki etkisini birlikte ele alıyoruz. Aydınlatma, sabit mobilya ve yüzey geçişlerini tasarımın ilk aşamalarından itibaren planlıyoruz.' },
+  { image: 'cool-residential.jpg', alt: 'Beyaz dolaplar, gri yüzeyler ve paslanmaz çelik detaylı çağdaş mutfak', title: 'Özgün bir bakış', text: 'Her yapının bulunduğu yerle, ışıkla ve kullanıcılarıyla kurduğu ilişki farklıdır. Hazır bir tasarım dilini tekrarlamak yerine, projenin kendine özgü olanaklarını araştırıyoruz. Mevcut hacmi, manzarayı, yapısal sınırları ve ihtiyaçları birlikte okuyarak mekâna ait çözümler geliştiriyoruz.' },
+  { image: 'cool-workspace.jpg', alt: 'Siyah çerçeveli cam bölmeler ve gri zeminli modern çalışma alanı', title: 'Birlikte tasarım', text: 'İyi bir tasarım sürecinin temelinde açık iletişim ve karşılıklı güven bulunur. İlk görüşmeden uygulama kararlarına kadar beklentilerinizi, önceliklerinizi ve bütçenizi birlikte değerlendiriyoruz. Alternatif planları, malzeme seçeneklerini ve mekânsal önerileri anlaşılır bir dille paylaşarak her aşamada bilinçli kararlar almanıza yardımcı oluyoruz.' },
+];
+---
+
+<section class="design-gallery" aria-label="Tasarıma yaklaşımımız">
+  {cards.map((card, index) => (
+    <article class="design-gallery__card">
+      <div class="design-gallery__panel" id={`design-panel-${index}`} aria-hidden="true">
+        <div class="design-gallery__copy">
+          <h2>{card.title}</h2>
+          <p>{card.text}</p>
+        </div>
+      </div>
+      <img class="design-gallery__image" src={`/images/gallery/${card.image}`} alt={card.alt} width="900" height="1440" loading="lazy" decoding="async" />
+      <button class="design-gallery__trigger" type="button" aria-label={`${card.title}: açıklamayı aç veya kapat`} aria-controls={`design-panel-${index}`} aria-expanded="false"></button>
+    </article>
+  ))}
+</section>
+
+<section class="design-metrics" aria-label="Stüdyo ve tasarım yaklaşımı">
+  <article class="design-metrics__item">
+    <p class="design-metrics__value"><span data-count="8">8</span></p>
+    <p class="design-metrics__label">Görsel sahne</p>
+  </article>
+  <article class="design-metrics__item">
+    <p class="design-metrics__value"><span data-count="4">4</span></p>
+    <p class="design-metrics__label">Tasarım yaklaşımı</p>
+  </article>
+  <article class="design-metrics__item">
+    <p class="design-metrics__value"><span data-count="1">1</span></p>
+    <p class="design-metrics__label">Mimarlık ve tasarım stüdyosu</p>
+  </article>
+</section>
+
+<ProjectRail />
+
+<script>
+  import '../scripts/design-gallery';
+  import '../scripts/design-metrics';
+</script>
+
+<style>
+  @font-face {
+    font-family: 'Manrope';
+    src: url('/fonts/manrope-variable.ttf') format('truetype');
+    font-weight: 200 800;
+    font-style: normal;
+    font-display: swap;
+  }
+  .design-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3px; height: clamp(28rem, 40vw, 44rem); background: var(--paper); color: #111; }
+  .design-gallery__card { position: relative; container-type: inline-size; min-width: 0; height: 100%; overflow: hidden; }
+  .design-gallery__panel { position: absolute; inset: 0; padding: 6.5cqi; background: #fff; pointer-events: none; }
+  .design-gallery__panel[aria-hidden='false'] .design-gallery__copy { pointer-events: auto; }
+  .design-gallery__copy { display: flex; flex-direction: column; justify-content: flex-start; gap: 9cqi; height: 100%; font-family: 'Manrope', 'Segoe UI', Arial, sans-serif; }
+  .design-gallery__copy > * { flex-shrink: 0; }
+  .design-gallery__copy h2 { margin: 0; font-family: inherit; font-size: 12cqi; font-weight: 200; line-height: 1.23; letter-spacing: -.04em; text-transform: uppercase; overflow-wrap: break-word; }
+  .design-gallery__copy p { margin: 0; font-size: 4.6cqi; font-weight: 400; line-height: 1.6; letter-spacing: -.015em; text-wrap: pretty; }
+  .design-gallery__image { position: absolute; z-index: 1; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.6); pointer-events: none; }
+  .design-gallery__trigger { display: none; position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; }
+  .design-gallery[data-enhanced] .design-gallery__trigger { display: block; }
+  .design-gallery__trigger:focus-visible { outline: 2px solid #779cb0; outline-offset: -6px; }
+  .design-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 8vw, 9rem) clamp(6rem, 12vw, 12rem); background: var(--paper); color: #161616; font-family: 'Manrope', 'Segoe UI', Arial, sans-serif; }
+  .design-metrics__item { display: flex; min-height: clamp(15rem, 25vw, 24rem); flex-direction: column; align-items: center; justify-content: center; gap: 1rem; text-align: center; }
+  .design-metrics__item + .design-metrics__item { border-left: 1px solid currentColor; }
+  .design-metrics__value { margin: 0; font-size: clamp(5rem, 10vw, 10rem); font-weight: 200; line-height: .95; letter-spacing: -.075em; font-variant-numeric: tabular-nums; }
+  .design-metrics__label { max-width: 18ch; margin: 0; font-size: clamp(.9rem, 1.2vw, 1.2rem); font-weight: 400; }
+  @media (max-width: 1023px) {
+    .design-gallery { grid-template-columns: repeat(4, min(82vw, 25rem)); height: clamp(30rem, 140vw, 40rem); overflow-x: auto; scroll-snap-type: x mandatory; }
+    .design-gallery__card { scroll-snap-align: start; }
+    .design-metrics { padding: 5rem 1rem 6rem; }
+    .design-metrics__item { min-height: 12rem; }
+    .design-metrics__value { font-size: clamp(4rem, 12vw, 7rem); }
+    .design-metrics__label { padding-inline: .5rem; font-size: .8rem; }
+  }
+  @media (max-width: 560px) {
+    .design-metrics { grid-template-columns: 1fr; }
+    .design-metrics__item { min-height: 12rem; }
+    .design-metrics__item + .design-metrics__item { border-top: 1px solid currentColor; border-left: 0; }
+  }
+</style>

@@ -1,0 +1,61 @@
+---
+const projects = [
+  { image: 'living.jpg', title: 'Işıkla açılan yaşam', type: 'Konut iç mekânı', alt: 'Geniş pencereler ve doğal malzemelerle aydınlanan çağdaş oturma alanı' },
+  { image: 'stair.jpg', title: 'Katmanlar ve çizgiler', type: 'İç mekân tasarımı', alt: 'Taş duvar, koyu merdiven ve cam bölmelerle tasarlanmış çağdaş iç mekân' },
+  { image: 'kitchen.jpg', title: 'Günün ritmi', type: 'Konut iç mekânı', alt: 'Gri ve ahşap tonlarında aydınlık mutfak ve oturma alanı' },
+  { image: 'glass.jpg', title: 'Mekânlar arasında', type: 'Mimari detay', alt: 'Ahşap panelli cam bölmelerle birbirine bağlanan mekânlar' },
+  { image: 'interior.jpg', title: 'Sessiz bir sığınak', type: 'Yatak odası', alt: 'Nötr tonlarda, gün ışığı alan sakin bir yatak odası' },
+  { image: 'residence.jpg', title: 'Yapıyla çevresi arasında', type: 'Konut mimarisi', alt: 'Ahşap kaplama ve geniş cam yüzeylerle tasarlanmış çağdaş konut' },
+];
+---
+
+<section class="project-rail" aria-labelledby="project-rail-title">
+  <div class="project-rail__viewport">
+    <div class="project-rail__track">
+      {projects.map((project, index) => (
+        <article class="project-rail__slide">
+          <img src={`/images/projects/${project.image}`} alt={project.alt} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
+          <div class="project-rail__shade"></div>
+          <p class="project-rail__index">ZCY / PROJE SEÇKİSİ &nbsp; {String(index + 1).padStart(2, '0')} — {String(projects.length).padStart(2, '0')}</p>
+          <div class="project-rail__caption">
+            <h2 id={index === 0 ? 'project-rail-title' : undefined}>{project.title}</h2>
+            <p>{project.type}</p>
+          </div>
+          <span class="project-rail__counter" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        </article>
+      ))}
+    </div>
+  </div>
+  <p class="project-rail__hint"><span>Kaydırarak projeleri keşfedin</span><span aria-hidden="true">↔</span></p>
+</section>
+
+<script>
+  import '../scripts/project-rail';
+</script>
+
+<style>
+  .project-rail { position: relative; overflow: hidden; background: #181a19; color: #fff; }
+  .project-rail__viewport { width: 100%; height: 100svh; overflow: hidden; }
+  .project-rail__track { display: flex; width: max-content; height: 100%; }
+  .project-rail__slide { position: relative; display: flex; width: 100vw; height: 100%; flex: 0 0 100vw; flex-direction: column; justify-content: space-between; overflow: hidden; padding: clamp(1.5rem, 4vw, 4.5rem); isolation: isolate; }
+  .project-rail__slide > img, .project-rail__shade { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; }
+  .project-rail__slide > img { object-fit: cover; object-position: center; }
+  .project-rail__shade { z-index: -1; background: linear-gradient(90deg, rgb(9 12 14 / 42%), transparent 70%), linear-gradient(0deg, rgb(9 12 14 / 60%), transparent 48%, rgb(9 12 14 / 22%)); }
+  .project-rail__index, .project-rail__caption p, .project-rail__hint { margin: 0; font-size: clamp(.68rem, .9vw, .85rem); letter-spacing: .12em; text-transform: uppercase; }
+  .project-rail__caption { display: flex; align-items: end; justify-content: space-between; gap: 2rem; }
+  .project-rail__caption h2 { max-width: 12ch; margin: 0; font-family: 'Manrope', 'Segoe UI', Arial, sans-serif; font-size: clamp(3rem, 8vw, 8rem); font-weight: 200; line-height: .98; letter-spacing: -.065em; }
+  .project-rail__caption p { padding-bottom: .6rem; }
+  .project-rail__counter { position: absolute; top: 50%; right: clamp(1.5rem, 4vw, 4.5rem); font-size: .7rem; letter-spacing: .1em; }
+  .project-rail__hint { position: absolute; right: clamp(1.5rem, 4vw, 4.5rem); bottom: 1.35rem; left: clamp(1.5rem, 4vw, 4.5rem); display: flex; justify-content: space-between; opacity: .8; }
+  @media (max-width: 1023px), (prefers-reduced-motion: reduce) {
+    .project-rail__viewport { height: 78svh; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+    .project-rail__slide { width: min(100vw, 58rem); flex-basis: min(100vw, 58rem); scroll-snap-align: start; }
+    .project-rail__caption { align-items: start; flex-direction: column; gap: .75rem; }
+    .project-rail__caption p { padding: 0; }
+    .project-rail__hint { pointer-events: none; }
+  }
+  @media (max-width: 560px) {
+    .project-rail__slide { width: 100vw; flex-basis: 100vw; }
+    .project-rail__caption h2 { font-size: clamp(3rem, 14vw, 5rem); }
+  }
+</style>

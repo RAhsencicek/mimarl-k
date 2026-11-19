@@ -1,0 +1,98 @@
+/**
+ * Videolar, Cartelle referansındaki anlatı sırasına göre yerleştirildi:
+ * açılış → seçilmiş mekânlar → ışık / üretim / malzeme yaklaşımı.
+ * Kaynak klipler korunur; web kopyaları public/videos altında adlandırılmıştır.
+ */
+export const homeMediaSlots = {
+  opening: {
+    id: 'opening-residential',
+    label: '01 / Açılış — Konut',
+    src: '/videos/konut-yasam.mp4',
+    poster: '/images/videos/konut-yasam.jpg',
+    alt: 'Gün ışığı alan, bitkiler ve doğal malzemelerle düzenlenmiş bir yaşam alanı.',
+  },
+  featured: [
+    {
+      id: 'atrium',
+      label: '02 / İç mekân — Hacim ve ışık',
+      title: 'İç avlu — hacim ve ışık',
+      category: 'Mekân filmi · 01',
+      src: '/videos/mekan-atrium.mp4',
+      poster: '/images/videos/mekan-atrium.jpg',
+      alt: 'Üstü camla örtülü, çok katlı bir iç avluya doğru yukarı bakan görüntü.',
+      ratio: 'landscape',
+    },
+    {
+      id: 'bathroom',
+      label: '03 / İç mekân — Banyo',
+      title: 'Günlük ritüel — banyo',
+      category: 'Mekân filmi · 02',
+      src: '/videos/banyo-detayi.mp4',
+      poster: '/images/videos/banyo-detayi.jpg',
+      alt: 'Koyu taş yüzeyler ve aydınlatılmış ayna bulunan bir banyo.',
+      ratio: 'landscape',
+    },
+    {
+      id: 'portrait-interior',
+      label: '04 / İç mekân — Düşey kadraj',
+      title: 'Günlük yaşam — düşey kadraj',
+      category: 'Mekân filmi · 03',
+      src: '/videos/ic-mekan-dikey.mp4',
+      poster: '/images/videos/ic-mekan-dikey.jpg',
+      alt: 'Masa, bitki ve oturma alanını gösteren düşey kadrajlı iç mekân görüntüsü.',
+      ratio: 'portrait',
+    },
+    {
+      id: 'commercial-interior',
+      label: '05 / Ticari mekân',
+      title: 'Karşılama — ticari mekân',
+      category: 'Mekân filmi · 04',
+      src: '/videos/ticari-mekan.mp4',
+      poster: '/images/videos/ticari-mekan.jpg',
+      alt: 'Ürün rafları ve tezgâhları bulunan aydınlatılmış bir ticari iç mekân.',
+      ratio: 'landscape',
+    },
+    {
+      id: 'hospitality-table',
+      label: '06 / Konaklama ve buluşma',
+      title: 'Sofra — buluşma mekânı',
+      category: 'Mekân filmi · 05',
+      src: '/videos/konaklama-masa.mp4',
+      poster: '/images/videos/konaklama-masa.jpg',
+      alt: 'Masa üzerinde çay takımı ve servis detayları.',
+      ratio: 'landscape',
+    },
+  ],
+  approach: [
+    {
+      id: 'light-time',
+      label: '07 / Işık ve zaman',
+      title: 'Işık, gün içinde değişir',
+      category: 'Tasarım yaklaşımı',
+      src: '/videos/isik-zaman-gecisi.mp4',
+      poster: '/images/videos/isik-zaman-gecisi.jpg',
+      alt: 'Aynı yaşam alanının karanlıktan gün ışığına doğru değişimi.',
+      ratio: 'landscape',
+    },
+    {
+      id: 'making-detail',
+      label: '08 / Üretim ve detay',
+      title: 'Üretim — yakından bakış',
+      category: 'Süreç',
+      src: '/videos/uretim-detayi.mp4',
+      poster: '/images/videos/uretim-detayi.jpg',
+      alt: 'Ahşap işleme sırasında kullanılan el aletlerini gösteren yakın plan.',
+      ratio: 'landscape',
+    },
+    {
+      id: 'material-light',
+      label: '09 / Malzeme ve ışık',
+      title: 'Malzeme — ışığın izi',
+      category: 'Tasarım yaklaşımı',
+      src: '/videos/malzeme-isik.mp4',
+      poster: '/images/videos/malzeme-isik.jpg',
+      alt: 'Güneş ışığının masa ve vazodaki bitki üzerine düşüşü.',
+      ratio: 'landscape',
+    },
+  ],
+} as const;
